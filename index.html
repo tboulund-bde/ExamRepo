@@ -4,8 +4,9 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + TS</title>
+    <title>Calculator</title>
     <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="https://use.typekit.net/bfr2hpb.css">
   </head>
   <body>
     <div id="app">
@@ -15,21 +16,24 @@
 
         <h1>Girl Math</h1>
 
-        <label for="numA">Number 1:</label>
-          <input type="number" id="numA">
 
-        <label for="numB">Number 2:</label>
-          <input type="number" id="numB">
+        <div class="input-box">
+          <label for="numA">Number 1:</label>
+            <input type="number" id="numA">
 
-        <div>
-        <button id="add">Add +</button>
-        <button id="sub">Substract -</button>
-        <button id="mul">Multiply *</button>
-        <button id="div">Divide /</button>
+          <label for="numB">Number 2:</label>
+            <input type="number" id="numB">
         </div>
 
-        <h2>Result: </h2>
+          <div id="btn">
+            <button id="add">Add +</button>
+            <button id="sub">Substract -</button>
+            <button id="mul">Multiply *</button>
+            <button id="div">Divide /</button>
+          </div>
 
+          <h2>Result: </h2>
+            <h3 id="result"></h3>
       </div>
 
     </div>
