@@ -38,8 +38,7 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
       <button id="convertBtn">Convert my choices</button>
 
       <ul class="result-list">
-        <label>Result</label>
-        <p type="number" id="result"></p>
+        <p class="result"></p>
       </ul>
 
     </form>
@@ -110,7 +109,6 @@ console.log(measureOne, measureTwo);
 
 // links to american to european converter
 const formAmerican = document.querySelector('.converter-american-to-european') as HTMLFormElement;
-console.log(formAmerican.children);
 
 // select
 const convertFrom = document.querySelector('#convertFrom') as HTMLSelectElement;
@@ -118,12 +116,51 @@ const convertTo = document.querySelector('#convertTo') as HTMLSelectElement;
 
 // inputs
 const amount = document.querySelector('#amount') as HTMLInputElement;
-// const result = document.querySelector('#result') as HTMLParagraphElement;
-
 
 // list results
 const ul = document.querySelector('ul')!;
 const list = new listResults(ul);
+
+
+
+
+
+
+// prints out the result of the convert
+const calculateConvert = () => {
+
+  // Store the static number of weights
+  let poundToGram:number = 453.59237;
+  let poundToKilogram:number = poundToGram / 1000;
+
+  let ounceToGram:number = 28.3495;
+  let ounceToKilogram:number = ounceToGram / 1000;
+
+  let result: number;
+
+  if (convertFrom.value === 'pound' && convertTo.value === 'gram') {
+    result = amount.valueAsNumber * poundToGram;
+  } 
+  
+  else if (convertFrom.value === 'pound' && convertTo.value === 'kilogram') {
+    result = amount.valueAsNumber * poundToKilogram;
+  } 
+  
+  else if (convertFrom.value === 'ounce' && convertTo.value === 'gram') {
+    result = amount.valueAsNumber * ounceToGram;
+
+  } 
+  
+  else {
+    result = amount.valueAsNumber * ounceToKilogram;
+  }
+
+  return result;
+}
+
+
+
+
 
 
 // print result out below the form
@@ -140,8 +177,21 @@ formAmerican.addEventListener('submit', (e: Event) => {
   // write the list out
   list.render(doc, convertFrom.value, 'end')
 
+
+  const results = calculateConvert();
+
+
+  // Display the result in your HTML
+  const resultElement = document.querySelector('.result') as HTMLElement;
+  resultElement.innerHTML = `Result: ${results}`;
+
   console.log(doc);
 })
+
+
+
+
+
 
 
 
