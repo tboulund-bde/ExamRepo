@@ -8,14 +8,14 @@ import { HasFormatter } from './modules/HasFormatter.js';
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
     <div class="title-subheading">
-      <h1>American's being American</h1>
-      <p>Ever wanted to bake a cake and the recipe is written in the “wrong” weights? We do! And that is why we created this weight converter application.</p>
+      <h1>Americans being American</h1>
+      <p>Ever wanted to bake a cake and the recipe is written in the “wrong” weights? We do! And that is why we created this weight converter calculator.</p>
     </div>
     
     <h2>Convert from American weight to European</h2>
     <form class="converter-american-to-european">
         <div class="field">
-          <label>What do you want to convert to:</label>
+          <label>What do you want to convert from:</label>
           <select id="convertFrom">
             <option value="pound">Pound</option>
             <option value="ounce">Ounce</option>
@@ -148,7 +148,6 @@ const calculateConvert = () => {
   
   else if (convertFrom.value === 'ounce' && convertTo.value === 'gram') {
     result = amount.valueAsNumber * ounceToGram;
-
   } 
   
   else {
@@ -157,9 +156,6 @@ const calculateConvert = () => {
 
   return result;
 }
-
-
-
 
 
 
