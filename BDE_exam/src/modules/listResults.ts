@@ -1,4 +1,4 @@
-import { HasFormatter } from '../modules/HasFormatter';
+import { HasFormatter } from '../interfaces/HasFormatter';
 
 // how the list will be printed out with text
 export class listResults {

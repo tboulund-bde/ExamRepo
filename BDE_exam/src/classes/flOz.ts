@@ -1,4 +1,4 @@
-import { HasFormatter } from '../modules/HasFormatter.js'
+import { HasFormatter } from '../interfaces/HasFormatter.js'
 
 // interface with classes for Fluid ounce
 // 'implements HasFormatter' tells it to follow the structure of HasFormatter

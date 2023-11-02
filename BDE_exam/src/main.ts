@@ -1,12 +1,18 @@
 import './style.css'
+
+// modules import
 import { listResults } from './modules/listResults.js'
+
+// classes import
 import { Ounce } from './classes/ounce.js';
 import { Pound } from './classes/pound.js';
 import { FlOz } from './classes/flOz.js';
 import { Cup } from './classes/cup.js';
 import { Pt } from './classes/pt.js';
-import { HasFormatter } from './modules/HasFormatter.js';
 
+// interfaces import
+import { HasFormatter } from './interfaces/HasFormatter.js';
+import { Unit } from './interfaces/unit.js';
 
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
@@ -15,11 +21,11 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
       <p>Ever wanted to bake a cake and the recipe is written in the “wrong” unit? We do! And that is why we created this unit converter calculator.</p>
     </div>
     
-    <h2>Weight</h2>
+    <h2 class="unitWeight"></h2>
     <form class="converter-weight">
         <div class="field">
           <label>What do you want to convert from:</label>
-          <select id="convertFrom">
+          <select id="convertFromWeight">
             <option value="pound">Pound</option>
             <option value="ounce">Ounce</option>
           </select>
@@ -27,12 +33,12 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
 
         <div class="field">
           <label>Amount:</label>
-          <input type="number" id="amount">
+          <input type="number" id="amountWeight">
         </div>
 
       <div class="field">
         <label>What do you want to convert to:</label>
-        <select id="convertTo">
+        <select id="convertToWeight">
           <option value="gram">Gram</option>
           <option value="kilogram">Kilogram</option>
         </select>
@@ -40,15 +46,15 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
       
       <button id="convertBtn">Convert my choices</button>
 
-      <ul class="result-list">
-        <p class="result"></p>
-        <p class="resultHistory"></p>
+      <ul class="result-list-weight">
+        <p class="resultWeight"></p>
+        <p class="resultWeightHistory"></p>
       </ul>
 
     </form>
 
 
-    <h2>Liquid</h2>
+    <h2 class="unitLiquid"></h2>
     <form class="converter-liquid">
         <div class="field">
           <label>What do you want to convert from:</label>
@@ -88,32 +94,26 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
 `
 
 
-
-// interface
-// this is sort of a template that is reusable
-interface Measure {
-  convertFrom: string;
-  amount: number;
-  convertTo: string;
+// title of forms to show what you are converting from and to and what you can convert
+// weight title
+const unitOne: Unit = {
+  type: "Weight",
+  options: ["Pound", "Ounce"],
 }
 
-
-const measureOne: Measure = {
-  convertFrom: "Pound",
-  amount: 3,
-  convertTo: "Gram",
+// liquid title
+const unitTwo: Unit = {
+  type: "Liquid",
+  options: ["Fluid Ounce", "Cup", "Pint"],
 }
 
-const measureTwo: Measure = {
-  convertFrom: "Ounce",
-  amount: 4,
-  convertTo: "Kilogram",
-}
+// print unitOne out on the page
+const unitWeight = document.querySelector('.unitWeight') as HTMLElement;
+unitWeight.innerHTML = `${unitOne.type} <br> ${unitOne.options}`;
 
-console.log(measureOne, measureTwo);
-
-
-
+// print unitTwo out on the page
+const unitLiquid = document.querySelector('.unitLiquid') as HTMLElement;
+unitLiquid.innerHTML = `${unitTwo.type} <br> ${unitTwo.options}`;
 
 
 
@@ -124,19 +124,19 @@ console.log(measureOne, measureTwo);
 const formWeight = document.querySelector('.converter-weight') as HTMLFormElement;
 
 // select
-const convertFrom = document.querySelector('#convertFrom') as HTMLSelectElement;
-const convertTo = document.querySelector('#convertTo') as HTMLSelectElement;
+const convertFromWeight = document.querySelector('#convertFromWeight') as HTMLSelectElement;
+const convertToWeight = document.querySelector('#convertToWeight') as HTMLSelectElement;
 
 // inputs
-const amount = document.querySelector('#amount') as HTMLInputElement;
+const amountWeight = document.querySelector('#amountWeight') as HTMLInputElement;
 
 // list results
-const ul = document.querySelector('ul')!;
-const list = new listResults(ul);
+const ulWeight = document.querySelector('ul')!;
+const listWeight = new listResults(ulWeight);
 
 
 // prints out the result of the convert and keeps the result in the list
-const calculateConvert = () => {
+const calculateConvertWeight = () => {
 
   // Store the static number of weights
   let poundToGram:number = 453.59237;
@@ -149,21 +149,21 @@ const calculateConvert = () => {
 
   // tell it which calculation to use
   // pound
-  if (convertFrom.value === 'pound' && convertTo.value === 'gram') {
-    result = amount.valueAsNumber * poundToGram;
+  if (convertFromWeight.value === 'pound' && convertToWeight.value === 'gram') {
+    result = amountWeight.valueAsNumber * poundToGram;
   } 
   
-  else if (convertFrom.value === 'pound' && convertTo.value === 'kilogram') {
-    result = amount.valueAsNumber * poundToKilogram;
+  else if (convertFromWeight.value === 'pound' && convertToWeight.value === 'kilogram') {
+    result = amountWeight.valueAsNumber * poundToKilogram;
   } 
   
   // ounce
-  else if (convertFrom.value === 'ounce' && convertTo.value === 'gram') {
-    result = amount.valueAsNumber * ounceToGram;
+  else if (convertFromWeight.value === 'ounce' && convertToWeight.value === 'gram') {
+    result = amountWeight.valueAsNumber * ounceToGram;
   } 
   
   else {
-    result = amount.valueAsNumber * ounceToKilogram;
+    result = amountWeight.valueAsNumber * ounceToKilogram;
   }
 
   return result;
@@ -176,29 +176,29 @@ formWeight.addEventListener('submit', (e: Event) => {
   e.preventDefault();
 
   // store the convertings in a variable
-  const results = calculateConvert();
+  const resultsWeight = calculateConvertWeight();
 
 
   // Display the result with the converted amount and the value it was converted to in HTML
-  const resultElement = document.querySelector('.result') as HTMLElement;
-  resultElement.innerHTML = `Result: ${results} ${convertTo.value}(s)`;
+  const resultWeightElement = document.querySelector('.resultWeight') as HTMLElement;
+  resultWeightElement.innerHTML = `Result: ${resultsWeight} ${convertToWeight.value}(s)`;
 
   // Display a paragraph with history result once a result has been calculated
-  const resultHistoryElement = document.querySelector('.resultHistory') as HTMLElement;
-  resultHistoryElement.innerHTML = `Result history`;
+  const resultWeightHistoryElement = document.querySelector('.resultWeightHistory') as HTMLElement;
+  resultWeightHistoryElement.innerHTML = `Result history`;
 
 
   // display the history of the results
   let doc: HasFormatter;
-  if (convertFrom.value === 'pound') {
-    doc = new Pound(convertFrom.value, amount.valueAsNumber, convertTo.value, results)
+  if (convertFromWeight.value === 'pound') {
+    doc = new Pound(convertFromWeight.value, amountWeight.valueAsNumber, convertToWeight.value, resultsWeight)
   } else {
-    doc = new Ounce(convertFrom.value, amount.valueAsNumber, convertTo.value, results)
+    doc = new Ounce(convertFromWeight.value, amountWeight.valueAsNumber, convertToWeight.value, resultsWeight)
   }
 
   
   // write the list out
-  list.render(doc, convertFrom.value, 'end')
+  listWeight.render(doc, convertFromWeight.value, 'end')
 
 
   

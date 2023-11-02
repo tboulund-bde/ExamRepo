@@ -99,16 +99,16 @@ h4 {
 
 
 /* styling the list of the calculations */
-.result-list, .result-list-liquid {
+.result-list-weight, .result-list-liquid {
   padding: 24px 0;
 }
 
-.result, .resultLiquid {
+.resultWeight, .resultLiquid {
   padding-bottom: 45px;
   font-size: 32px;
 }
 
-.resultHistory, .resultLiquidHistory {
+.resultWeightHistory, .resultLiquidHistory {
   font-size: 18px;
   font-weight: var(--bold-font);
 }
