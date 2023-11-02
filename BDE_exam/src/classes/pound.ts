@@ -6,10 +6,10 @@ export class Pound implements HasFormatter{
   
     // tell system what to expect with constructor
     constructor (
-        private convertFromWeight: string, // make private so it isn't accessable to change the value
+        public convertFromWeight: string,
         public amountWeight: number, // make public so it is accessable to change the value
-        private convertToWeight: string, // make private so it isn't accessable to change the value
-        private resultsWeight: number, // make private so it isn't accessable to change the value
+        public convertToWeight: string, 
+        public resultsWeight: number, 
     ) {}
   
     // prints out what was the result of the conversion

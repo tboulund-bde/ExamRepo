@@ -6,10 +6,10 @@ export class FlOz implements HasFormatter{
   
     // tell system what to expect with constructor
     constructor (
-        private convertFromLiquid: string, // make private so it isn't accessable to change the value
+        public convertFromLiquid: string, 
         public amountLiquid: number, // make public so it is accessable to change the value
-        private convertToLiquid: string, // make private so it isn't accessable to change the value
-        private resultsLiquid: number, // make private so it isn't accessable to change the value
+        public convertToLiquid: string,
+        public resultsLiquid: number, 
     ) {}
   
     // prints out what was the result of the conversion
