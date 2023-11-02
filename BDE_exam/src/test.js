@@ -23,4 +23,5 @@ test("Create new weight converter", async t => {
     .click(Selector("#convertBtn"))
 
     .expect(Selector(".resultWeight").innerText).contains("Result: 0.340194 kilogram(s)")
+    
 });
