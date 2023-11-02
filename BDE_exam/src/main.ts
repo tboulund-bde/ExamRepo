@@ -1,7 +1,5 @@
 import './style.css'
-// import { Measure } from './modules/measure.js'
 import { listResults } from './modules/listResults.js'
-import { listResultsLiquids } from './modules/listResultsLiquids.js';
 import { Ounce } from './classes/ounce.js';
 import { Pound } from './classes/pound.js';
 import { FlOz } from './classes/flOz.js';
@@ -91,36 +89,6 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
 
 
 
-let docOne: HasFormatter;
-let docTwo: HasFormatter;
-
-docOne = new Pound("Pound", 2, "Gram", 5);
-docTwo = new Ounce("Ounce", 5, "Kilogram", 3);
-
-
-// can be added as long as they have the HasFormatter interface
-let docs: HasFormatter[] = [];
-docs.push(docOne);
-docs.push(docTwo);
-
-console.log(docs);
-
-
-// Measure class
-const resultOne = new Pound("Pound", 1, "Gram", 6);
-const resultTwo = new Pound("Ounce", 3, "Gram", 5);
-
-
-// create an array to store the results under one 
-let results: Pound[] = [];
-results.push(resultOne);
-results.push(resultTwo);
-
-console.log( results );
-
-
-
-
 // interface
 // this is sort of a template that is reusable
 interface Measure {
@@ -153,7 +121,7 @@ console.log(measureOne, measureTwo);
 // weight converter
 
 // links to american to european converter
-const formAmerican = document.querySelector('.converter-weight') as HTMLFormElement;
+const formWeight = document.querySelector('.converter-weight') as HTMLFormElement;
 
 // select
 const convertFrom = document.querySelector('#convertFrom') as HTMLSelectElement;
@@ -179,6 +147,8 @@ const calculateConvert = () => {
 
   let result: number;
 
+  // tell it which calculation to use
+  // pound
   if (convertFrom.value === 'pound' && convertTo.value === 'gram') {
     result = amount.valueAsNumber * poundToGram;
   } 
@@ -187,6 +157,7 @@ const calculateConvert = () => {
     result = amount.valueAsNumber * poundToKilogram;
   } 
   
+  // ounce
   else if (convertFrom.value === 'ounce' && convertTo.value === 'gram') {
     result = amount.valueAsNumber * ounceToGram;
   } 
@@ -201,10 +172,10 @@ const calculateConvert = () => {
 
 
 // print result out below the form
-formAmerican.addEventListener('submit', (e: Event) => {
+formWeight.addEventListener('submit', (e: Event) => {
   e.preventDefault();
 
-
+  // store the convertings in a variable
   const results = calculateConvert();
 
 
@@ -252,7 +223,7 @@ const amountLiquid = document.querySelector('#amountLiquid') as HTMLInputElement
 
 // list results in ul with a class of .result-list-liquid
 const ulLiquid = document.querySelector('.result-list-liquid') as HTMLUListElement;
-const listLiquid = new listResultsLiquids(ulLiquid);
+const listLiquid = new listResults(ulLiquid);
 
 
 // prints out the result of the convert and keeps the result in the list
@@ -276,6 +247,8 @@ const calculateConvertLiquid = () => {
 
   let resultLiquid: number;
 
+
+  // tell it which calculation to use
   //fl oz
   if (convertFromLiquid.value === 'flOz' && convertToLiquid.value === 'ml') {
     resultLiquid = amountLiquid.valueAsNumber * flOzToMl;
@@ -336,7 +309,7 @@ const calculateConvertLiquid = () => {
 formLiquid.addEventListener('submit', (e: Event) => {
   e.preventDefault();
 
-
+  // store the convertings in a variable
   const resultsLiquid = calculateConvertLiquid();
 
 
