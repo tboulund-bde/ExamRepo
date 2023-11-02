@@ -7,10 +7,16 @@ h1 {
     text-align:center;
 }
 
+.winner {
+    display: hidden;
+}
+
 .game-container {
-    display: flex;
+    display: grid;
+    grid-template-columns: 75px 75px 75px;
+    gap: 20px;
     justify-content: center;
-    align-items: center;
+
 }
 
 .box {
@@ -21,6 +27,7 @@ h1 {
     font-weight: bold;
     font-size: 40px;
     box-shadow: 5px 5px 5px black;
+    cursor: pointer;
 }
 
 .button-container {
@@ -30,6 +37,11 @@ h1 {
 }
 
 /*Button Styles */
+
+.button {
+    cursor: pointer;
+    visibility: hidden;
+}
 
 .input {
     padding: 10px 20px;
