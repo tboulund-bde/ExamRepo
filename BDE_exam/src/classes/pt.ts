@@ -1,8 +1,8 @@
-import { HasFormatterLiquid } from '../modules/HasFormatterLiquid.js'
+import { HasFormatter } from '../modules/HasFormatter.js'
 
 // interface with classes for Pint
-// 'implements HasFormatterLiquid' tells it to follow the structure of HasFormatterLiquid
-export class Pt implements HasFormatterLiquid{
+// 'implements HasFormatter' tells it to follow the structure of HasFormatter
+export class Pt implements HasFormatter{
   
     // tell system what to expect with constructor
     constructor (
@@ -14,7 +14,7 @@ export class Pt implements HasFormatterLiquid{
   
     // prints out what was the result of the conversion
     format() {
-      return `${this.resultsLiquid} ${this.convertToLiquid}(s) = ${this.amountLiquid} ${this.convertFromLiquid}(s)`;
+      return `${this.amountLiquid} ${this.convertFromLiquid} = ${this.resultsLiquid} ${this.convertToLiquid}`;
     }
   }
 

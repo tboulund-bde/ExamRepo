@@ -8,17 +8,16 @@ import { FlOz } from './classes/flOz.js';
 import { Cup } from './classes/cup.js';
 import { Pt } from './classes/pt.js';
 import { HasFormatter } from './modules/HasFormatter.js';
-import { HasFormatterLiquid } from './modules/HasFormatterLiquid.js';
 
 
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
     <div class="title-subheading">
       <h1>Americans being American</h1>
-      <p>Ever wanted to bake a cake and the recipe is written in the “wrong” weights? We do! And that is why we created this weight converter calculator.</p>
+      <p>Ever wanted to bake a cake and the recipe is written in the “wrong” unit? We do! And that is why we created this unit converter calculator.</p>
     </div>
     
-    <h2>American weight to European weight</h2>
+    <h2>Weight</h2>
     <form class="converter-weight">
         <div class="field">
           <label>What do you want to convert from:</label>
@@ -51,7 +50,7 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
     </form>
 
 
-    <h2>American liquid to European liquid</h2>
+    <h2>Liquid</h2>
     <form class="converter-liquid">
         <div class="field">
           <label>What do you want to convert from:</label>
@@ -351,7 +350,7 @@ formLiquid.addEventListener('submit', (e: Event) => {
 
 
   // display the history of the results
-  let docTwo: HasFormatterLiquid;
+  let docTwo: HasFormatter;
   if (convertFromLiquid.value === 'flOz') {
     docTwo = new FlOz(convertFromLiquid.value, amountLiquid.valueAsNumber, convertToLiquid.value, resultsLiquid)
   } else if (convertFromLiquid.value === 'cup') {
