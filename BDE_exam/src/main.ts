@@ -26,8 +26,8 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
         <div class="field">
           <label>What do you want to convert from:</label>
           <select id="convertFromWeight">
-            <option value="pound">Pound</option>
-            <option value="ounce">Ounce</option>
+            <option value="pound" class="pound">Pound</option>
+            <option value="ounce" class="ounce">Ounce</option>
           </select>
         </div> 
 
@@ -39,12 +39,12 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
       <div class="field">
         <label>What do you want to convert to:</label>
         <select id="convertToWeight">
-          <option value="gram">Gram</option>
-          <option value="kilogram">Kilogram</option>
+          <option value="gram" class="gram">Gram</option>
+          <option value="kilogram" class="kilogram">Kilogram</option>
         </select>
       </div>   
       
-      <button id="convertBtn">Convert my choices</button>
+      <button id="convertBtnWeight">Convert my choices</button>
 
       <ul class="result-list-weight">
         <p class="resultWeight"></p>
@@ -80,7 +80,7 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
         </select>
       </div>   
       
-      <button id="convertBtn">Convert my choices</button>
+      <button id="convertBtnLiquid">Convert my choices</button>
 
       <ul class="result-list-liquid">
         <p class="resultLiquid"></p>
