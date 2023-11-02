@@ -8,6 +8,7 @@ import { FlOz } from './classes/flOz.js';
 import { Cup } from './classes/cup.js';
 import { Pt } from './classes/pt.js';
 import { HasFormatter } from './modules/HasFormatter.js';
+import { HasFormatterLiquid } from './modules/HasFormatterLiquid.js';
 
 
 
@@ -250,8 +251,8 @@ const convertToLiquid = document.querySelector('#convertToLiquid') as HTMLSelect
 // inputs
 const amountLiquid = document.querySelector('#amountLiquid') as HTMLInputElement;
 
-// list results
-const ulLiquid = document.querySelector('ul')!;
+// list results in ul with a class of .result-list-liquid
+const ulLiquid = document.querySelector('.result-list-liquid') as HTMLUListElement;
 const listLiquid = new listResultsLiquids(ulLiquid);
 
 
@@ -350,7 +351,7 @@ formLiquid.addEventListener('submit', (e: Event) => {
 
 
   // display the history of the results
-  let docTwo: HasFormatter;
+  let docTwo: HasFormatterLiquid;
   if (convertFromLiquid.value === 'flOz') {
     docTwo = new FlOz(convertFromLiquid.value, amountLiquid.valueAsNumber, convertToLiquid.value, resultsLiquid)
   } else if (convertFromLiquid.value === 'cup') {

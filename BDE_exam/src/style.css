@@ -65,22 +65,30 @@ h1, h2, h4, p, label {
 h1, h2, h4 {
   font-family: var(--font-family);
   font-weight: var(--bold-font);
-  font-size: 42px;
+}
+
+h2 {
+  font-size: 36px;
 }
 
 h1 {
   font-size: 72px;
 }
 
-.result-list {
+h4 {
+  font-size: 32px;
+}
+
+.result-list, .result-list-liquid {
   padding: 24px 0;
 }
 
-.result {
+.result, .resultLiquid {
   padding-bottom: 45px;
+  font-size: 32px;
 }
 
-.resultHistory {
+.resultHistory, .resultLiquidHistory {
   font-size: 18px;
   font-weight: var(--bold-font);
 }

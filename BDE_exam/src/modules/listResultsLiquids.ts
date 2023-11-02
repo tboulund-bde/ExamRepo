@@ -1,10 +1,10 @@
-import { HasFormatter } from '../modules/HasFormatter';
+import { HasFormatterLiquid } from '../modules/HasFormatterLiquid';
 
 // how the list will be printed out with text
 export class listResultsLiquids {
     constructor(private container: HTMLUListElement) {}
 
-    render(item: HasFormatter, heading: string, pos: 'start' | 'end') {
+    render(item: HasFormatterLiquid, heading: string, pos: 'start' | 'end') {
         const li = document.createElement('li');
 
         const h4 = document.createElement('h4');

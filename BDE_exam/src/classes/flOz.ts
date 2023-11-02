@@ -1,8 +1,8 @@
-import { HasFormatter } from '../modules/HasFormatter.js'
+import { HasFormatterLiquid } from '../modules/HasFormatterLiquid.js'
 
 // interface with classes for Fluid ounce
-// 'implements HasFormatter' tells it to follow the structure of HasFormatter
-export class FlOz implements HasFormatter{
+// 'implements HasFormatterLiquid' tells it to follow the structure of HasFormatterLiquid
+export class FlOz implements HasFormatterLiquid{
   
     // tell system what to expect with constructor
     constructor (
