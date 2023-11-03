@@ -1,353 +1,264 @@
-import './style.css'
-import typescriptLogo from './typescript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.ts'
+import '../src/style.css'
 
-document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://www.typescriptlang.org/" target="_blank">
-      <img src="${typescriptLogo}" class="logo vanilla" alt="TypeScript logo" />
-    </a>
-    <h1>Vite + TypeScript</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite and TypeScript logos to learn more
-    </p>
-  </div>
-`
+// modules import
+import { listResults } from './modules/listResults.js'
 
-setupCounter(document.querySelector<HTMLButtonElement>('#counter')!)
+// classes import
+import { Ounce } from './classes/ounce.js';
+import { Pound } from './classes/pound.js';
+import { FlOz } from './classes/flOz.js';
+import { Cup } from './classes/cup.js';
+import { Pt } from './classes/pt.js';
+
+// interfaces import
+import { HasFormatter } from './interfaces/HasFormatter.js';
+import { Unit } from './interfaces/unit.js';
 
 
 
+// title of forms to show what you are converting from and to and what you can convert
+// weight title
+const unitOne: Unit = {
+  type: "Weight",
+  options: ["Pound", "Ounce"],
+}
+
+// liquid title
+const unitTwo: Unit = {
+  type: "Liquid",
+  options: ["Fluid Ounce", "Cup", "Pint"],
+}
+
+// print unitOne out on the page
+const unitWeight = document.querySelector('.unitWeight') as HTMLElement;
+unitWeight.innerHTML = `${unitOne.type} <br> ${unitOne.options}`;
+
+// print unitTwo out on the page
+const unitLiquid = document.querySelector('.unitLiquid') as HTMLElement;
+unitLiquid.innerHTML = `${unitTwo.type} <br> ${unitTwo.options}`;
 
 
 
-// Interface about american lengths
-type americanLengths = {
-  inch: number,
-  foot: number,
-  yard: number,
-  mile: number,
+
+// weight converter
+
+// links to american to european converter
+const formWeight = document.querySelector('.converter-weight') as HTMLFormElement;
+
+// select
+const convertFromWeight = document.querySelector('#convertFromWeight') as HTMLSelectElement;
+const convertToWeight = document.querySelector('#convertToWeight') as HTMLSelectElement;
+
+// inputs
+const amountWeight = document.querySelector('#amountWeight') as HTMLInputElement;
+
+// list results
+const ulWeight = document.querySelector('ul')!;
+const listWeight = new listResults(ulWeight);
+
+
+// prints out the result of the convert and keeps the result in the list
+const calculateConvertWeight = () => {
+
+  // Store the static number of weights
+  let poundToGram:number = 453.59237;
+  let poundToKilogram:number = poundToGram / 1000;
+
+  let ounceToGram:number = 28.3495;
+  let ounceToKilogram:number = ounceToGram / 1000;
+
+  let result: number;
+
+  // tell it which calculation to use
+  // pound
+  if (convertFromWeight.value === 'pound' && convertToWeight.value === 'gram') {
+    result = amountWeight.valueAsNumber * poundToGram;
+  } 
+  
+  else if (convertFromWeight.value === 'pound' && convertToWeight.value === 'kilogram') {
+    result = amountWeight.valueAsNumber * poundToKilogram;
+  } 
+  
+  // ounce
+  else if (convertFromWeight.value === 'ounce' && convertToWeight.value === 'gram') {
+    result = amountWeight.valueAsNumber * ounceToGram;
+  } 
+  
+  else {
+    result = amountWeight.valueAsNumber * ounceToKilogram;
+  }
+
+  return result;
 }
 
 
 
+// print result out below the form
+formWeight.addEventListener('submit', (e: Event) => {
+  e.preventDefault();
+
+  // store the convertings in a variable
+  const resultsWeight = calculateConvertWeight();
 
 
-interface AmericanLengths {
-  inch: number,
-  foot: number,
-  yard: number,
-  mile: number,
+  // Display the result with the converted amount and the value it was converted to in HTML
+  const resultWeightElement = document.querySelector('.resultWeight') as HTMLElement;
+  resultWeightElement.innerHTML = `Result: ${resultsWeight} ${convertToWeight.value}(s)`;
+
+  // Display a paragraph with history result once a result has been calculated
+  const resultWeightHistoryElement = document.querySelector('.resultWeightHistory') as HTMLElement;
+  resultWeightHistoryElement.innerHTML = `Result history`;
+
+
+  // display the history of the results
+  let doc: HasFormatter;
+  if (convertFromWeight.value === 'pound') {
+    doc = new Pound(convertFromWeight.value, amountWeight.valueAsNumber, convertToWeight.value, resultsWeight)
+  } else {
+    doc = new Ounce(convertFromWeight.value, amountWeight.valueAsNumber, convertToWeight.value, resultsWeight)
+  }
+
+  
+  // write the list out
+  listWeight.render(doc, convertFromWeight.value, 'end')
+
+
+  
+  console.log(doc);
+})
+
+
+
+
+
+// liquid converter
+
+// links to american to european converter
+const formLiquid = document.querySelector('.converter-liquid') as HTMLFormElement;
+
+// select
+const convertFromLiquid = document.querySelector('#convertFromLiquid') as HTMLSelectElement;
+const convertToLiquid = document.querySelector('#convertToLiquid') as HTMLSelectElement;
+
+// inputs
+const amountLiquid = document.querySelector('#amountLiquid') as HTMLInputElement;
+
+// list results in ul with a class of .result-list-liquid
+const ulLiquid = document.querySelector('.result-list-liquid') as HTMLUListElement;
+const listLiquid = new listResults(ulLiquid);
+
+
+// prints out the result of the convert and keeps the result in the list
+const calculateConvertLiquid = () => {
+
+  // Store the static number of liquids
+  let flOzToMl:number = 29.5735;
+  let flOzToLiter:number = flOzToMl / 1000;
+  let flOzToCentiliter:number = flOzToMl / 10;
+  let flOzToDeciliter:number = flOzToMl / 100;
+
+  let cupToMl:number = 236.58824;
+  let cupToLiter:number = cupToMl / 1000;
+  let cupToCentiliter:number = cupToMl / 10;
+  let cupToDeciliter:number = cupToMl / 100;
+
+  let ptToMl:number = 473.17648;
+  let ptToLiter:number = ptToMl / 1000;
+  let ptToCentiliter:number = ptToMl / 10;
+  let ptToDeciliter:number = ptToMl / 100;
+
+  let resultLiquid: number;
+
+
+  // tell it which calculation to use
+  //fl oz
+  if (convertFromLiquid.value === 'flOz' && convertToLiquid.value === 'ml') {
+    resultLiquid = amountLiquid.valueAsNumber * flOzToMl;
+  } 
+  
+  else if (convertFromLiquid.value === 'flOz' && convertToLiquid.value === 'l') {
+    resultLiquid = amountLiquid.valueAsNumber * flOzToLiter;
+  } 
+  
+  else if (convertFromLiquid.value === 'flOz' && convertToLiquid.value === 'cl') {
+    resultLiquid = amountLiquid.valueAsNumber * flOzToCentiliter;
+  } 
+
+  else if (convertFromLiquid.value === 'flOz' && convertToLiquid.value === 'dl') {
+    resultLiquid = amountLiquid.valueAsNumber * flOzToDeciliter;
+  } 
+
+  // cup
+  else if (convertFromLiquid.value === 'cup' && convertToLiquid.value === 'ml') {
+    resultLiquid = amountLiquid.valueAsNumber * cupToMl;
+  } 
+
+  else if (convertFromLiquid.value === 'cup' && convertToLiquid.value === 'l') {
+    resultLiquid = amountLiquid.valueAsNumber * cupToLiter;
+  } 
+
+  else if (convertFromLiquid.value === 'cup' && convertToLiquid.value === 'cl') {
+    resultLiquid = amountLiquid.valueAsNumber * cupToCentiliter;
+  } 
+  
+  else if (convertFromLiquid.value === 'cup' && convertToLiquid.value === 'dl') {
+    resultLiquid = amountLiquid.valueAsNumber * cupToDeciliter;
+  } 
+
+  // pint
+  else if (convertFromLiquid.value === 'pt' && convertToLiquid.value === 'ml') {
+    resultLiquid = amountLiquid.valueAsNumber * ptToMl;
+  } 
+
+  else if (convertFromLiquid.value === 'pt' && convertToLiquid.value === 'l') {
+    resultLiquid = amountLiquid.valueAsNumber * ptToLiter;
+  } 
+
+  else if (convertFromLiquid.value === 'pt' && convertToLiquid.value === 'dl') {
+    resultLiquid = amountLiquid.valueAsNumber * ptToCentiliter;
+  } 
+
+  else {
+    resultLiquid = amountLiquid.valueAsNumber * ptToDeciliter;
+  }
+
+  return resultLiquid;
 }
 
-const americanLengths: AmericanLengths = {
-  inch: 2.54,
-  foot: 12,
-  yard: 36,
-  mile: 63360,
-}
 
-console.log(americanLengths);
 
+// print result out below the form
+formLiquid.addEventListener('submit', (e: Event) => {
+  e.preventDefault();
 
+  // store the convertings in a variable
+  const resultsLiquid = calculateConvertLiquid();
 
 
+  // Display the result with the converted amount and the value it was converted to in HTML
+  const resultLiquidElement = document.querySelector('.resultLiquid') as HTMLElement;
+  resultLiquidElement.innerHTML = `Result: ${resultsLiquid} ${convertToLiquid.value}`;
 
-// Calculate from inches to cm
-// Store the static number of an inch 
-let inch:number = 2.54;
-let foot:number = 12;
-let yard:number = foot * 3;
-let mile:number = foot * 5.280;
+  // Display a paragraph with history result once a result has been calculated
+  const resultLiquidHistoryElement = document.querySelector('.resultLiquidHistory') as HTMLElement;
+  resultLiquidHistoryElement.innerHTML = `Result history`;
 
 
+  // display the history of the results
+  let docTwo: HasFormatter;
+  if (convertFromLiquid.value === 'flOz') {
+    docTwo = new FlOz(convertFromLiquid.value, amountLiquid.valueAsNumber, convertToLiquid.value, resultsLiquid)
+  } else if (convertFromLiquid.value === 'cup') {
+    docTwo = new Cup(convertFromLiquid.value, amountLiquid.valueAsNumber, convertToLiquid.value, resultsLiquid)
+  } else {
+    docTwo = new Pt(convertFromLiquid.value, amountLiquid.valueAsNumber, convertToLiquid.value, resultsLiquid)
+  }
 
-// Function to calculate inches to cm
-function calculateInchesToCm (inches: number) {
-  return inches * inch;
-}
+  
+  // write the list out
+  listLiquid.render(docTwo, convertFromLiquid.value, 'end')
 
-// console log to check the result
-console.log(calculateInchesToCm (5), "cm");
 
-
-
-// Calculate from cm to inches
-// Store the static number of a cm
-let cmToInch:number = 0.393701;
-
-// Function to calculate cm to inches
-function calculateCmToInches (cms: number) {
-  return cms * cmToInch;
-}
-
-// console log to check the result
-console.log(calculateCmToInches (5), "inches");
-
-
-
-
-
-
-
-
-
-
-
-interface Americanweights {
-  pound: number,
-  ounce: number,
-  ton: number,
-}
-
-const americanweights: Americanweights = {
-  pound: 2.54,
-  ounce: 12,
-  ton: 36,
-}
-
-console.log("American weights", americanweights);
-
-// Store the static number of weights 
-let pound:number = 2.54;
-let ounce:number = 12;
-let ton:number = foot * 3;
-
-
-
-
-interface Europeanweights {
-  gram: number,
-  kilogram: number,
-  metricTon: number,
-}
-
-const europeanweights: Europeanweights = {
-  gram: 2.54,
-  kilogram: 12,
-  metricTon: 36,
-}
-
-console.log("European weights", europeanweights);
-
-
-
-
-
-
-
-// from pound to european weights
-// Store the static number of weights from pound to european weights
-let poundToGram:number = 453.59237;
-let poundToKilogram:number = poundToGram / 1000;
-let poundToMetricTon:number = poundToGram / 1000000;
-
-
-// Function to calculate pound to gram
-function calculatePoundToGram (pound: number) {
-  return pound * poundToGram;
-}
-
-console.log(calculatePoundToGram (5), "grams");
-
-
-
-// function to calculate pound to kilogram
-function calculatePoundToKilogram (pound: number) {
-  return pound * poundToKilogram;
-}
-
-console.log(calculatePoundToKilogram (5), "kilograms");
-
-
-// function to calculate pound to metric ton
-function calculatePoundToMetricTon (pound: number) {
-  return pound * poundToMetricTon;
-}
-
-console.log(calculatePoundToMetricTon (5), "metric tons");
-
-
-
-
-// from ounce to european weights
-// Store the static number of weights from ounce to european weights
-let ounceToGram:number = 28.3495;
-let ounceToKilogram:number = ounceToGram / 1000;
-let ounceToMetricTon:number = ounceToGram / 1000000;
-
-
-// Function to calculate ounce to gram
-function calculateOunceToGram (ounce: number) {
-  return ounce * ounceToGram;
-}
-
-console.log(calculateOunceToGram (5), "grams");
-
-
-
-// function to calculate ounce to kilogram
-function calculateOunceToKilogram (ounce: number) {
-  return ounce * ounceToKilogram;
-}
-
-console.log(calculateOunceToKilogram (5), "kilograms");
-
-
-// function to calculate ounce to metric ton
-function calculateOunceToMetricTon (ounce: number) {
-  return ounce * ounceToMetricTon;
-}
-
-console.log(calculateOunceToMetricTon (5), "metric tons");
-
-
-
-
-// from ton to european weights
-// Store the static number of weights from ton to european weights
-let tonToGram:number = 907184.74;
-let tonToKilogram:number = tonToGram / 1000;
-let tonToMetricTon:number = tonToGram / 1000000;
-
-
-// Function to calculate ounce to gram
-function calculateTonToGram (ton: number) {
-  return ton * tonToGram;
-}
-
-console.log(calculateTonToGram (5), "grams");
-
-
-
-// function to calculate ounce to kilogram
-function calculateTonToKilogram (ton: number) {
-  return ton * tonToKilogram;
-}
-
-console.log(calculateTonToKilogram (5), "kilograms");
-
-
-// function to calculate ounce to metric ton
-function calculateTonToMetricTon (ton: number) {
-  return ton * tonToMetricTon;
-}
-
-console.log(calculateTonToMetricTon (5), "metric tons");
-
-
-
-
-
-
-// from gram to american weights
-// Store the static number of weights from gram to american weights
-let gramToPound:number = 453.59237;
-let gramToOunce:number = gramToPound / 16;
-let gramToTon:number = 0.0005;
-
-
-// Function to calculate gram to pound
-function calculateGramToPound (gram: number) {
-  return gram / gramToPound;
-}
-
-console.log(calculateGramToPound (5), "gram to pounds");
-
-
-
-// function to calculate gram to ounce
-function calculateGramToOunce (ton: number) {
-  return ton / gramToOunce;
-}
-
-console.log(calculateGramToOunce (5), "gram to ounces");
-
-
-// function to calculate ounce to metric ton
-function calculateGramToTon(gram: number) {
-  return gram * gramToTon;
-}
-
-console.log(calculateGramToTon (5), "gram to tons");
-
-
-
-
-
-
-
-// from kilogram to american weights
-// Store the static number of weights from kilogram to american weights
-let kilogramToPound:number = 453.59237;
-let kilogramToOunce:number = kilogramToPound / 16;
-let kilogramToTon:number = 0.0005;
-
-
-// Function to calculate kilograms to pound
-function calculateKilogramToPound (kilogram: number) {
-  return kilogram / kilogramToPound;
-}
-
-console.log(calculateKilogramToPound (5), "kilograms to pounds");
-
-
-
-// function to calculate kilograms to ounce
-function calculateKilogramToOunce (kilogram: number) {
-  return kilogram / kilogramToOunce;
-}
-
-console.log(calculateKilogramToOunce (5), "kilograms to ounces");
-
-
-// function to calculate kilograms to metric ton
-function calculateKilogramToTon(kilogram: number) {
-  return kilogram * kilogramToTon;
-}
-
-console.log(calculateKilogramToTon (5), "kilograms to tons");
-
-
-
-
-
-
-
-// from metric ton to american weights
-// Store the static number of weights from metric ton to american weights
-let metricTonToPound:number = 453.59237;
-let metricTonToOunce:number = metricTonToPound / 16;
-let metricTonToTon:number = 0.0005;
-
-
-// Function to calculate metric ton to pound
-function calculateMetricTonToPound (metricTon: number) {
-  return metricTon / metricTonToPound;
-}
-
-console.log(calculateMetricTonToPound (5), "metric ton to pounds");
-
-
-
-// function to calculate metric ton to ounce
-function calculateMetricTonToOunce (metricTon: number) {
-  return metricTon / metricTonToOunce;
-}
-
-console.log(calculateMetricTonToOunce (5), "metric ton to ounces");
-
-
-// function to calculate metric ton to metric ton
-function calculateMetricTonToTon(metricTon: number) {
-  return metricTon * metricTonToTon;
-}
-
-console.log(calculateMetricTonToTon (5), "metric ton to tons");
+  
+  console.log(docTwo);
+})
