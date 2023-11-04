@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-require("../src/style.css");
 // modules import
 var listResults_js_1 = require("./modules/listResults.js");
 // classes import

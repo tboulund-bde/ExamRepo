@@ -1,4 +1,4 @@
-import { HasFormatter } from '../interfaces/HasFormatter';
+import { HasFormatter } from '../interfaces/HasFormatter.js';
 
 // how the list will be printed out with text
 export class listResults {

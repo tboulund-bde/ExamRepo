@@ -1,5 +1,3 @@
-import '../src/style.css'
-
 // modules import
 import { listResults } from './modules/listResults.js'
 
