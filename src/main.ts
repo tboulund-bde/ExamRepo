@@ -1,3 +1,5 @@
+import './style.css';
+
 // modules import
 import { listResults } from './modules/listResults.js'
 

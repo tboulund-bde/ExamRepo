@@ -1,28 +1,34 @@
 import { Selector } from "testcafe"
 
-fixture`Converter`
-    .page("./index.html");
-
+fixture `Converter`
+    .page (`./index.html`);
+ 
 // first test
 test("Create new weight converter", async t => {
     await t
 
-    .expect(Selector("#convertFromWeight").innerText).contains("Pound")
+    // pre-assert
+    // first expect the results value to be empty
+    .expect(Selector(".resultWeight").innerText).contains("")
 
-    .click('#convertFromWeight')
+    // arange
+    .click(Selector("#convertFromWeight"))
 
+    // act
     .click(Selector(".ounce"))
 
     .click(Selector("#amountWeight"))
 
     .typeText(Selector("#amountWeight"), "12")
 
-    .click('#convertToWeight')
+    .click(Selector("#convertToWeight"))
 
     .click(Selector(".kilogram"))
 
     .click(Selector("#convertBtnWeight"))
 
+    // assert
+    // now expect that the results value is 0.340194 kilogram(s)
     .expect(Selector(".resultWeight").innerText).contains("Result: 0.340194 kilogram(s)")
     
 });
@@ -31,22 +37,28 @@ test("Create new weight converter", async t => {
 test("Create new liquid converter", async t => {
     await t
 
-    .expect(Selector("#convertFromLiquid").innerText).contains("Fluid Ounce")
+    // pre-assert
+    // first expect the results value to be empty
+    .expect(Selector(".resultWeight").innerText).contains("")
 
-    .click('#convertFromLiquid')
+    // arange
+    .click(Selector("#convertFromLiquid"))
 
+    // act
     .click(Selector(".cup"))
 
     .click(Selector("#amountLiquid"))
 
     .typeText(Selector("#amountLiquid"), "2")
 
-    .click('#convertToLiquid')
+    .click(Selector("#convertToLiquid"))
 
     .click(Selector(".cl"))
 
     .click(Selector("#convertBtnLiquid"))
 
+    // assert
+    // now expect that the results value is 47.317648000000005 cl
     .expect(Selector(".resultLiquid").innerText).contains("Result: 47.317648000000005 cl")
     
 });
