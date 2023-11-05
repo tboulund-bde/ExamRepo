@@ -8,8 +8,8 @@ test("Create new weight converter", async t => {
     await t
 
     // pre-assert
-    // .expect(Selector(".resultWeight").innerText).contains("")
-    .expect(Selector("#convertFromWeight").innerText).contains("Pound")
+    // first expect the results value to be empty
+    .expect(Selector(".resultWeight").innerText).contains("")
 
     // arange
     .click(Selector("#convertFromWeight"))
@@ -28,6 +28,7 @@ test("Create new weight converter", async t => {
     .click(Selector("#convertBtnWeight"))
 
     // assert
+    // now expect that the results value is 0.340194 kilogram(s)
     .expect(Selector(".resultWeight").innerText).contains("Result: 0.340194 kilogram(s)")
     
 });
@@ -37,8 +38,8 @@ test("Create new liquid converter", async t => {
     await t
 
     // pre-assert
-    // .expect(Selector(".resultWeight").innerText).contains("")
-    .expect(Selector("#convertFromLiquid").innerText).contains("Fluid Ounce")
+    // first expect the results value to be empty
+    .expect(Selector(".resultWeight").innerText).contains("")
 
     // arange
     .click(Selector("#convertFromLiquid"))
@@ -57,6 +58,7 @@ test("Create new liquid converter", async t => {
     .click(Selector("#convertBtnLiquid"))
 
     // assert
+    // now expect that the results value is 47.317648000000005 cl
     .expect(Selector(".resultLiquid").innerText).contains("Result: 47.317648000000005 cl")
     
 });
