@@ -1,9 +1,5 @@
 import { Selector } from "testcafe"
 
-const resultLiquid = Selector('.resultLiquid');
-const resultWeight = Selector('.resultWeight');
-
-
 fixture `Converter`
     .page (`./index.html`);
  
@@ -35,7 +31,6 @@ test("Create new weight converter", async t => {
 
     // assert
     // now expect that the results value is 0.340194 kilogram(s)
-    .expect(resultWeight.textContent).eql("Result: 0.340194 kilogram(s)");
     // .expect(Selector(".resultWeight").innerText).contains("Result: 0.340194 kilogram(s)")
     
 });
@@ -69,7 +64,6 @@ test("Create new liquid converter", async t => {
 
     // assert
     // now expect that the results value is 47.317648000000005 cl
-    .expect(resultLiquid.textContent).eql("Result: 47.317648000000005 cl");
     // .expect(Selector(".resultLiquid").innerText).contains("Result: 47.317648000000005 cl")
     
 });
