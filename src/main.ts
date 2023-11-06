@@ -1,18 +1,20 @@
 import './style.css';
 
 // modules import
-import { listResults } from './modules/listResults.js'
+import { listResults } from '../src/modules/listResults'
 
 // classes import
-import { Ounce } from './classes/ounce.js';
-import { Pound } from './classes/pound.js';
-import { FlOz } from './classes/flOz.js';
-import { Cup } from './classes/cup.js';
-import { Pt } from './classes/pt.js';
+import { Ounce } from './classes/ounce';
+import { Pound } from './classes/pound';
+import { FlOz } from './classes/flOz';
+import { Cup } from './classes/cup';
+import { Pt } from './classes/pt';
 
 // interfaces import
-import { HasFormatter } from './interfaces/HasFormatter.js';
-import { Unit } from './interfaces/unit.js';
+import { HasFormatter } from './interfaces/HasFormatter';
+import { Unit } from './interfaces/unit';
+
+
 
 
 
