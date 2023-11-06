@@ -1,13 +1,17 @@
 import { Selector } from "testcafe"
 
+const resultLiquid = Selector('.resultLiquid');
+const resultWeight = Selector('.resultWeight');
+
+
 fixture `Converter`
     .page (`./index.html`);
  
 // first test
 test("Create new weight converter", async t => {
     await t
-
-    .wait(5000)
+    .wait(2000) // wait for 2 seconds
+    .setTestSpeed(0.5) // slow down the test
 
     // pre-assert
     // first expect the results value to be empty
@@ -31,16 +35,18 @@ test("Create new weight converter", async t => {
 
     // assert
     // now expect that the results value is 0.340194 kilogram(s)
-    .expect(Selector(".resultWeight").innerText).contains("Result: 0.340194 kilogram(s)")
+    .expect(resultWeight.textContent).eql("Result: 0.340194 kilogram(s)");
+    // .expect(Selector(".resultWeight").innerText).contains("Result: 0.340194 kilogram(s)")
     
 });
 
 // second test
 test("Create new liquid converter", async t => {
     await t
+    .wait(2000) // wait for 2 seconds
 
+    .setTestSpeed(0.5) // slow down the test
 
-    .wait(5000)
     // pre-assert
     // first expect the results value to be empty
     .expect(Selector(".resultWeight").innerText).contains("")
@@ -63,6 +69,7 @@ test("Create new liquid converter", async t => {
 
     // assert
     // now expect that the results value is 47.317648000000005 cl
-    .expect(Selector(".resultLiquid").innerText).contains("Result: 47.317648000000005 cl")
+    .expect(resultLiquid.textContent).eql("Result: 47.317648000000005 cl");
+    // .expect(Selector(".resultLiquid").innerText).contains("Result: 47.317648000000005 cl")
     
 });
