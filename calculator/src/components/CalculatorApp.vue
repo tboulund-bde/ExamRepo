@@ -1,23 +1,38 @@
 <template>
-  <div class="calculator">
-    <div class="calculator-display">
-      {{ state.displayValue }}
+  <div class="boxnumerouno">
+    <div class="calculator">
+      <div class="calculator-display">
+        {{ state.displayValue }}
+      </div>
+      <div class="calculator-buttons">
+        <button class="btnC" @click="clear">C</button>
+        <button
+          v-for="digit in [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]"
+          :key="digit"
+          @click="appendToDisplay(digit.toString())"
+        >
+          {{ digit }}
+        </button>
+        <button class="operation-btn" @click="appendToOperator('+')">+</button>
+        <button class="operation-btn" @click="appendToOperator('-')">-</button>
+        <button class="operation-btn" @click="appendToOperator('*')">*</button>
+        <button class="dot-btn" @click="appendToDisplay('.')">.</button>
+        <button class="operation-btn" @click="calculateResult">=</button>
+        <button class="operation-btn" @click="appendToOperator('/')">/</button>
+      </div>
     </div>
-    <div class="calculator-buttons">
-      <button @click="clear">C</button>
-      <button
-        v-for="digit in [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]"
-        :key="digit"
-        @click="appendToDisplay(digit.toString())"
+
+    <div class="discription">
+      <h1 class="heading">Calculate your dreams!</h1>
+      <p class="text">
+        This is a simple calculator app built with Vue 3 and TypeScript. It
+        supports the basic operations of addition, subtraction, multiplication,
+        and division.
+      </p>
+      <p class="text2">Do you want to upgrade to the Premium version?</p>
+      <a class="link" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
+        Click here!</a
       >
-        {{ digit }}
-      </button>
-      <button class="operation-btn" @click="appendToOperator('+')">+</button>
-      <button class="operation-btn" @click="appendToOperator('-')">-</button>
-      <button class="operation-btn" @click="appendToOperator('*')">*</button>
-      <button class="dot-btn" @click="appendToDisplay('.')">.</button>
-      <button class="operation-btn" @click="calculateResult">=</button>
-      <button class="operation-btn" @click="appendToOperator('/')">/</button>
     </div>
   </div>
 </template>
@@ -87,19 +102,41 @@ export default defineComponent({
 </script>
 
 <style scoped>
+.boxnumerouno {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-color: #4169e1;
+  height: 100vh;
+}
 .calculator {
   display: inline-block;
   width: 200px;
-  border: 1px solid #ccc;
+  border: 3px solid #d3d3d3;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 75px;
+  width: 25%;
+}
+
+.discription {
+  display: inline-block;
+  width: 200px;
+  border: 3px solid #d3d3d3;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 75px;
+  width: 25%;
+  padding: 20px;
 }
 
 .calculator-display {
   text-align: right;
   padding: 10px;
-  border-bottom: 1px solid #ccc;
-  background-color: #f5f5f5;
+  border-bottom: 3px solid #d3d3d3;
+  border-radius: 5px;
+  background-color: #4169e1;
   font-size: 20px;
   font-weight: bold;
 }
@@ -107,24 +144,125 @@ export default defineComponent({
 .calculator-buttons {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  background-color: #d3d3d3;
+}
+
+.calculator-buttons button:hover {
+  background-color: #e3e3e3;
+  cursor: pointer;
 }
 
 .operation-btn {
-  background-color: #9f9f1f;
+  background-color: #d3d3d3;
 }
 
 .dot-btn {
-  background-color: #eee;
+  background-color: #d3d3d3;
 }
 
 button {
   padding: 10px;
   border: none;
-  background-color: #eee;
+  background-color: #d3d3d3;
   cursor: pointer;
 }
 
 button:hover {
-  background-color: #ccc;
+  background-color: #d3d3d3;
+}
+
+.discription {
+  padding: 20px;
+  background-color: #d3d3d3;
+}
+
+.heading {
+  font-size: 30px;
+  font-weight: bold;
+  color: #4169e1;
+}
+
+.text {
+  font-size: 17px;
+}
+.text2 {
+  font-size: 17px;
+  font-weight: bold;
+  padding-top: 15px;
+}
+
+.link {
+  font-size: 17px;
+  font-weight: bold;
+  padding-top: 15px;
+  color: #4169e1;
+  text-align: center;
+}
+
+.link:hover {
+  color: #938bf3;
+}
+
+.btnC {
+  background-color: orange;
+  color: white;
+  border-radius: 5px;
+}
+
+.btnC:hover {
+  background-color: white;
+  color: orange;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 2px;
+  transition: all 0.3s ease;
+}
+
+.operation-btn {
+  background-color: #992255;
+  color: white;
+  border-radius: 5px;
+  margin: 2px;
+}
+
+.operation-btn:hover {
+  background-color: white;
+  color: #992255;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 2px;
+  transition: all 0.3s ease;
+}
+
+.dot-btn {
+  background-color: #992255;
+  color: white;
+  border-radius: 5px;
+  margin: 2px;
+}
+
+.dot-btn:hover {
+  background-color: white;
+  color: #992255;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 2px;
+  transition: all 0.3s ease;
+}
+
+button {
+  background-color: #4169e1;
+  color: white;
+  border-radius: 5px;
+  margin: 2px;
+}
+
+button:hover {
+  background-color: white;
+  color: #4169e1;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 2px;
+  transition: all 0.3s ease;
 }
 </style>
