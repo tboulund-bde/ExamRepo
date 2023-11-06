@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import HelloWorld from "./components/HelloWorld.vue";
+import CalculatorApp from "./components/CalculatorApp.vue";
 </script>
 
 <template>
-  <HelloWorld msg="Vite + Vue" />
+  <CalculatorApp msg="Vite + Vue" />
 </template>
 
 <style scoped></style>
