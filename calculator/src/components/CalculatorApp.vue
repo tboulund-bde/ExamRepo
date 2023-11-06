@@ -223,7 +223,7 @@ button:hover {
 }
 
 .link:hover {
-  color: #938bf3;
+  color: #992255;
 }
 
 .btnC {
