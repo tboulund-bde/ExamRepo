@@ -1,4 +1,8 @@
 <template>
+  <div class="box">
+    <h1 class="title_h">Amazing Calculator 2023</h1>
+    <p class="title_p">Free version</p>
+  </div>
   <div class="boxnumerouno">
     <div class="calculator">
       <div class="calculator-display">
@@ -21,7 +25,6 @@
         <button class="operation-btn" @click="appendToOperator('/')">/</button>
       </div>
     </div>
-
     <div class="discription">
       <h1 class="heading">Calculate your dreams!</h1>
       <p class="text">
@@ -29,7 +32,9 @@
         supports the basic operations of addition, subtraction, multiplication,
         and division.
       </p>
-      <p class="text2">Do you want to upgrade to the Premium version?</p>
+      <p class="text2">
+        Do you want to upgrade to remove ads and have more functionality?
+      </p>
       <a class="link" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
         Click here!</a
       >
@@ -102,6 +107,24 @@ export default defineComponent({
 </script>
 
 <style scoped>
+.box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-color: #4169e1;
+  padding-top: 20px;
+}
+
+.title_h {
+  color: #d3d3d3;
+  font-size: 40px;
+  padding-right: 10px;
+}
+.title_p {
+  color: #d3d3d3;
+  font-size: 17px;
+}
 .boxnumerouno {
   display: flex;
   flex-direction: row;
@@ -135,7 +158,7 @@ export default defineComponent({
   text-align: right;
   padding: 10px;
   border-bottom: 3px solid #d3d3d3;
-  border-radius: 5px;
+  border-radius: 5px 5px 0 0;
   background-color: #4169e1;
   font-size: 20px;
   font-weight: bold;
@@ -264,5 +287,31 @@ button:hover {
   cursor: pointer;
   margin: 2px;
   transition: all 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .box {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .title_h {
+    font-size: 30px;
+    padding-right: 0;
+  }
+
+  .title_p {
+    font-size: 14px;
+  }
+
+  .calculator {
+    width: 80%;
+    margin: 20px;
+  }
+
+  .discription {
+    width: 80%;
+    margin: 20px;
+  }
 }
 </style>
