@@ -7,6 +7,8 @@ fixture `Converter`
 test("Create new weight converter", async t => {
     await t
 
+    .wait(5000)
+
     // pre-assert
     // first expect the results value to be empty
     .expect(Selector(".resultWeight").innerText).contains("")
@@ -37,6 +39,8 @@ test("Create new weight converter", async t => {
 test("Create new liquid converter", async t => {
     await t
 
+
+    .wait(5000)
     // pre-assert
     // first expect the results value to be empty
     .expect(Selector(".resultWeight").innerText).contains("")
