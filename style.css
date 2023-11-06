@@ -20,7 +20,6 @@ h1 {
 }
 
 .box {
-    background-color: blueviolet;
     text-align: center;
     width: 75px;
     height: 70px;
@@ -28,6 +27,53 @@ h1 {
     font-size: 40px;
     box-shadow: 5px 5px 5px black;
     cursor: pointer;
+    animation: mymove 15s infinite alternate;
+}
+
+.x {
+    background-color: rgb(132, 0, 255); 
+    text-align: center;
+    width: 75px;
+    height: 70px;
+    font-weight: bold;
+    font-size: 40px;
+    box-shadow: 5px 5px 5px black;
+    cursor: pointer;
+}
+.o {
+    background-color: rgb(223, 61, 255);
+    text-align: center;
+    width: 75px;
+    height: 70px;
+    font-weight: bold;
+    font-size: 40px;
+    box-shadow: 5px 5px 5px black;
+    cursor: pointer;
+}
+
+@keyframes mymove {
+   0% {
+    background-color: rgb(98, 63, 255);
+   }
+   14% {
+    background-color: rgb(195, 0, 255);
+   }
+
+    28% {
+     background-color: rgb(255, 122, 242);
+    }
+    42% {
+     background-color: rgb(255, 4, 159);
+    }
+    66% {
+     background-color: rgb(255, 16, 96);
+    }
+    82% {
+     background-color: rgb(123, 7, 206);
+    }
+    100% {
+     background-color: violet;
+    }
 }
 
 .button-container {

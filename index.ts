@@ -24,6 +24,7 @@ function runGame(e: Event): void {
     const box: HTMLElement | null = document.querySelector(`#${boxId}`);
     if (box === null || box.textContent !== '') return;
     box.textContent = turn;
+    changeBoxBackground(box);
     const winner: boolean = checkWinner();
     if (!winner) switchPlayer();
     else {
@@ -31,17 +32,40 @@ function runGame(e: Event): void {
     }
 }
 
+function changeBoxBackground(box: HTMLElement): void {
+    if (turn === 'X') box.classList.replace('box', 'x');
+    else box.classList.replace('box', 'o');
+    
+}
+
+
 function endGame(): void {
     board.removeEventListener('click', runGame);
     button.addEventListener('click', resetGame);
     if (winMessage === null) return;
-    winMessage.textContent = turn;
+    winMessage.textContent = `Winner is ${turn}!`;
     winMessage.setAttribute('display', 'block');
     button.style.visibility = 'visible';
 }
 
 function resetGame(): void {
-    console.log('Game reset');
+    turn = 'X';
+    resetBoxes();
+    button.style.visibility = 'hidden';
+    winMessage.textContent = "";
+    board.addEventListener('click', runGame);
+}
+
+function resetBoxes(): void {
+    for (let i = 0; i <= 8; i++) {
+        const box = document.querySelector(`#box-${i}`) as HTMLElement;
+        box.textContent = "";
+        //resetting animation
+        const boxClass: string = box.className;
+        box.classList.remove(boxClass);
+        void box.offsetWidth;
+        box.classList.add('box');
+    }
 }
 
 function checkWinner(): boolean {
