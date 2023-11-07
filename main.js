@@ -1,14 +1,16 @@
+"use strict";
+// :( deleted folders with interfaces, classes and modules because vite and manual ts do not like to export and import
 // how the list will be printed out with text
-var listResults = /** @class */ (function () {
-    function listResults(container) {
+class listResults {
+    constructor(container) {
         this.container = container;
     }
-    listResults.prototype.render = function (item, heading, pos) {
-        var li = document.createElement('li');
-        var h4 = document.createElement('h4');
+    render(item, heading, pos) {
+        const li = document.createElement('li');
+        const h4 = document.createElement('h4');
         h4.innerText = heading; // 'heading' is what will be shown as the heading, write the variable that calculates the converting
         li.append(h4);
-        var p = document.createElement('p');
+        const p = document.createElement('p');
         p.innerText = item.format();
         li.append(p);
         // put at start 
@@ -18,14 +20,13 @@ var listResults = /** @class */ (function () {
         else {
             this.container.append(li);
         }
-    };
-    return listResults;
-}());
+    }
+}
 // interface with classes for Cup
 // 'implements HasFormatter' tells it to follow the structure of HasFormatter
-var Cup = /** @class */ (function () {
+class Cup {
     // tell system what to expect with constructor
-    function Cup(convertFromLiquid, amountLiquid, // make public so it is accessable to change the value
+    constructor(convertFromLiquid, amountLiquid, // make public so it is accessable to change the value
     convertToLiquid, resultsLiquid) {
         this.convertFromLiquid = convertFromLiquid;
         this.amountLiquid = amountLiquid;
@@ -33,16 +34,15 @@ var Cup = /** @class */ (function () {
         this.resultsLiquid = resultsLiquid;
     }
     // prints out what was the result of the conversion
-    Cup.prototype.format = function () {
-        return "".concat(this.amountLiquid, " ").concat(this.convertFromLiquid, " = ").concat(this.resultsLiquid, " ").concat(this.convertToLiquid);
-    };
-    return Cup;
-}());
+    format() {
+        return `${this.amountLiquid} ${this.convertFromLiquid} = ${this.resultsLiquid} ${this.convertToLiquid}`;
+    }
+}
 // interface with classes for Fluid ounce
 // 'implements HasFormatter' tells it to follow the structure of HasFormatter
-var FlOz = /** @class */ (function () {
+class FlOz {
     // tell system what to expect with constructor
-    function FlOz(convertFromLiquid, amountLiquid, // make public so it is accessable to change the value
+    constructor(convertFromLiquid, amountLiquid, // make public so it is accessable to change the value
     convertToLiquid, resultsLiquid) {
         this.convertFromLiquid = convertFromLiquid;
         this.amountLiquid = amountLiquid;
@@ -50,16 +50,15 @@ var FlOz = /** @class */ (function () {
         this.resultsLiquid = resultsLiquid;
     }
     // prints out what was the result of the conversion
-    FlOz.prototype.format = function () {
-        return "".concat(this.amountLiquid, " ").concat(this.convertFromLiquid, " = ").concat(this.resultsLiquid, " ").concat(this.convertToLiquid);
-    };
-    return FlOz;
-}());
+    format() {
+        return `${this.amountLiquid} ${this.convertFromLiquid} = ${this.resultsLiquid} ${this.convertToLiquid}`;
+    }
+}
 // interface with classes for Ounce
 // 'implements HasFormatter' tells it to follow the structure of HasFormatter
-var Ounce = /** @class */ (function () {
+class Ounce {
     // tell system what to expect with constructor
-    function Ounce(convertFromWeight, amountWeight, // make public so it is accessable to change the value
+    constructor(convertFromWeight, amountWeight, // make public so it is accessable to change the value
     convertToWeight, resultsWeight) {
         this.convertFromWeight = convertFromWeight;
         this.amountWeight = amountWeight;
@@ -67,16 +66,15 @@ var Ounce = /** @class */ (function () {
         this.resultsWeight = resultsWeight;
     }
     // prints out what was the result of the conversion
-    Ounce.prototype.format = function () {
-        return "".concat(this.resultsWeight, " ").concat(this.convertToWeight, "(s) = ").concat(this.amountWeight, " ").concat(this.convertFromWeight, "(s)");
-    };
-    return Ounce;
-}());
+    format() {
+        return `${this.resultsWeight} ${this.convertToWeight}(s) = ${this.amountWeight} ${this.convertFromWeight}(s)`;
+    }
+}
 // interface with classes for Pound
 // 'implements HasFormatter' tells it to follow the structure of HasFormatter
-var Pound = /** @class */ (function () {
+class Pound {
     // tell system what to expect with constructor
-    function Pound(convertFromWeight, amountWeight, // make public so it is accessable to change the value
+    constructor(convertFromWeight, amountWeight, // make public so it is accessable to change the value
     convertToWeight, resultsWeight) {
         this.convertFromWeight = convertFromWeight;
         this.amountWeight = amountWeight;
@@ -84,16 +82,15 @@ var Pound = /** @class */ (function () {
         this.resultsWeight = resultsWeight;
     }
     // prints out what was the result of the conversion
-    Pound.prototype.format = function () {
-        return "".concat(this.resultsWeight, " ").concat(this.convertToWeight, "(s) = ").concat(this.amountWeight, " ").concat(this.convertFromWeight, "(s)");
-    };
-    return Pound;
-}());
+    format() {
+        return `${this.resultsWeight} ${this.convertToWeight}(s) = ${this.amountWeight} ${this.convertFromWeight}(s)`;
+    }
+}
 // interface with classes for Pint
 // 'implements HasFormatter' tells it to follow the structure of HasFormatter
-var Pt = /** @class */ (function () {
+class Pt {
     // tell system what to expect with constructor
-    function Pt(convertFromLiquid, amountLiquid, // make public so it is accessable to change the value
+    constructor(convertFromLiquid, amountLiquid, // make public so it is accessable to change the value
     convertToLiquid, resultsLiquid) {
         this.convertFromLiquid = convertFromLiquid;
         this.amountLiquid = amountLiquid;
@@ -101,47 +98,46 @@ var Pt = /** @class */ (function () {
         this.resultsLiquid = resultsLiquid;
     }
     // prints out what was the result of the conversion
-    Pt.prototype.format = function () {
-        return "".concat(this.amountLiquid, " ").concat(this.convertFromLiquid, " = ").concat(this.resultsLiquid, " ").concat(this.convertToLiquid);
-    };
-    return Pt;
-}());
+    format() {
+        return `${this.amountLiquid} ${this.convertFromLiquid} = ${this.resultsLiquid} ${this.convertToLiquid}`;
+    }
+}
 // title of forms to show what you are converting from and to and what you can convert
 // weight title
-var unitOne = {
+const unitOne = {
     type: "Weight",
     options: ["Pound", "Ounce"],
 };
 // liquid title
-var unitTwo = {
+const unitTwo = {
     type: "Liquid",
     options: ["Fluid Ounce", "Cup", "Pint"],
 };
 // print unitOne out on the page
-var unitWeight = document.querySelector('.unitWeight');
-unitWeight.innerHTML = "".concat(unitOne.type, " <br> ").concat(unitOne.options);
+const unitWeight = document.querySelector('.unitWeight');
+unitWeight.innerHTML = `${unitOne.type} <br> ${unitOne.options}`;
 // print unitTwo out on the page
-var unitLiquid = document.querySelector('.unitLiquid');
-unitLiquid.innerHTML = "".concat(unitTwo.type, " <br> ").concat(unitTwo.options);
+const unitLiquid = document.querySelector('.unitLiquid');
+unitLiquid.innerHTML = `${unitTwo.type} <br> ${unitTwo.options}`;
 // weight converter
 // links to american to european converter
-var formWeight = document.querySelector('.converter-weight');
+const formWeight = document.querySelector('.converter-weight');
 // select
-var convertFromWeight = document.querySelector('#convertFromWeight');
-var convertToWeight = document.querySelector('#convertToWeight');
+const convertFromWeight = document.querySelector('#convertFromWeight');
+const convertToWeight = document.querySelector('#convertToWeight');
 // inputs
-var amountWeight = document.querySelector('#amountWeight');
+const amountWeight = document.querySelector('#amountWeight');
 // list results
-var ulWeight = document.querySelector('ul');
-var listWeight = new listResults(ulWeight);
+const ulWeight = document.querySelector('ul');
+const listWeight = new listResults(ulWeight);
 // prints out the result of the convert and keeps the result in the list
-var calculateConvertWeight = function () {
+const calculateConvertWeight = () => {
     // Store the static number of weights
-    var poundToGram = 453.59237;
-    var poundToKilogram = poundToGram / 1000;
-    var ounceToGram = 28.3495;
-    var ounceToKilogram = ounceToGram / 1000;
-    var result;
+    let poundToGram = 453.59237;
+    let poundToKilogram = poundToGram / 1000;
+    let ounceToGram = 28.3495;
+    let ounceToKilogram = ounceToGram / 1000;
+    let result;
     // tell it which calculation to use
     // pound
     if (convertFromWeight.value === 'pound' && convertToWeight.value === 'gram') {
@@ -160,18 +156,18 @@ var calculateConvertWeight = function () {
     return result;
 };
 // print result out below the form
-formWeight.addEventListener('submit', function (e) {
+formWeight.addEventListener('submit', (e) => {
     e.preventDefault();
     // store the convertings in a variable
-    var resultsWeight = calculateConvertWeight();
+    const resultsWeight = calculateConvertWeight();
     // Display the result with the converted amount and the value it was converted to in HTML
-    var resultWeightElement = document.querySelector('.resultWeight');
-    resultWeightElement.innerHTML = "Result: ".concat(resultsWeight, " ").concat(convertToWeight.value, "(s)");
+    const resultWeightElement = document.querySelector('.resultWeight');
+    resultWeightElement.innerHTML = `Result: ${resultsWeight} ${convertToWeight.value}(s)`;
     // Display a paragraph with history result once a result has been calculated
-    var resultWeightHistoryElement = document.querySelector('.resultWeightHistory');
-    resultWeightHistoryElement.innerHTML = "Result history";
+    const resultWeightHistoryElement = document.querySelector('.resultWeightHistory');
+    resultWeightHistoryElement.innerHTML = `Result history`;
     // display the history of the results
-    var doc;
+    let doc;
     if (convertFromWeight.value === 'pound') {
         doc = new Pound(convertFromWeight.value, amountWeight.valueAsNumber, convertToWeight.value, resultsWeight);
     }
@@ -184,31 +180,31 @@ formWeight.addEventListener('submit', function (e) {
 });
 // liquid converter
 // links to american to european converter
-var formLiquid = document.querySelector('.converter-liquid');
+const formLiquid = document.querySelector('.converter-liquid');
 // select
-var convertFromLiquid = document.querySelector('#convertFromLiquid');
-var convertToLiquid = document.querySelector('#convertToLiquid');
+const convertFromLiquid = document.querySelector('#convertFromLiquid');
+const convertToLiquid = document.querySelector('#convertToLiquid');
 // inputs
-var amountLiquid = document.querySelector('#amountLiquid');
+const amountLiquid = document.querySelector('#amountLiquid');
 // list results in ul with a class of .result-list-liquid
-var ulLiquid = document.querySelector('.result-list-liquid');
-var listLiquid = new listResults(ulLiquid);
+const ulLiquid = document.querySelector('.result-list-liquid');
+const listLiquid = new listResults(ulLiquid);
 // prints out the result of the convert and keeps the result in the list
-var calculateConvertLiquid = function () {
+const calculateConvertLiquid = () => {
     // Store the static number of liquids
-    var flOzToMl = 29.5735;
-    var flOzToLiter = flOzToMl / 1000;
-    var flOzToCentiliter = flOzToMl / 10;
-    var flOzToDeciliter = flOzToMl / 100;
-    var cupToMl = 236.58824;
-    var cupToLiter = cupToMl / 1000;
-    var cupToCentiliter = cupToMl / 10;
-    var cupToDeciliter = cupToMl / 100;
-    var ptToMl = 473.17648;
-    var ptToLiter = ptToMl / 1000;
-    var ptToCentiliter = ptToMl / 10;
-    var ptToDeciliter = ptToMl / 100;
-    var resultLiquid;
+    let flOzToMl = 29.5735;
+    let flOzToLiter = flOzToMl / 1000;
+    let flOzToCentiliter = flOzToMl / 10;
+    let flOzToDeciliter = flOzToMl / 100;
+    let cupToMl = 236.58824;
+    let cupToLiter = cupToMl / 1000;
+    let cupToCentiliter = cupToMl / 10;
+    let cupToDeciliter = cupToMl / 100;
+    let ptToMl = 473.17648;
+    let ptToLiter = ptToMl / 1000;
+    let ptToCentiliter = ptToMl / 10;
+    let ptToDeciliter = ptToMl / 100;
+    let resultLiquid;
     // tell it which calculation to use
     //fl oz
     if (convertFromLiquid.value === 'flOz' && convertToLiquid.value === 'ml') {
@@ -252,18 +248,18 @@ var calculateConvertLiquid = function () {
     return resultLiquid;
 };
 // print result out below the form
-formLiquid.addEventListener('submit', function (e) {
+formLiquid.addEventListener('submit', (e) => {
     e.preventDefault();
     // store the convertings in a variable
-    var resultsLiquid = calculateConvertLiquid();
+    const resultsLiquid = calculateConvertLiquid();
     // Display the result with the converted amount and the value it was converted to in HTML
-    var resultLiquidElement = document.querySelector('.resultLiquid');
-    resultLiquidElement.innerHTML = "Result: ".concat(resultsLiquid, " ").concat(convertToLiquid.value);
+    const resultLiquidElement = document.querySelector('.resultLiquid');
+    resultLiquidElement.innerHTML = `Result: ${resultsLiquid} ${convertToLiquid.value}`;
     // Display a paragraph with history result once a result has been calculated
-    var resultLiquidHistoryElement = document.querySelector('.resultLiquidHistory');
-    resultLiquidHistoryElement.innerHTML = "Result history";
+    const resultLiquidHistoryElement = document.querySelector('.resultLiquidHistory');
+    resultLiquidHistoryElement.innerHTML = `Result history`;
     // display the history of the results
-    var docTwo;
+    let docTwo;
     if (convertFromLiquid.value === 'flOz') {
         docTwo = new FlOz(convertFromLiquid.value, amountLiquid.valueAsNumber, convertToLiquid.value, resultsLiquid);
     }
