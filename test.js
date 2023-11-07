@@ -35,7 +35,13 @@ test("Create new weight converter", async t => {
 
     // assert
     // now expect that the results value is 0.340194 kilogram(s)
+<<<<<<< HEAD
 
+=======
+    .expect(resultWeight.textContent).eql("Result: 0.340194 kilogram(s)");
+    // .expect(Selector(".resultWeight").innerText).contains("Result: 0.340194 kilogram(s)")
+    
+>>>>>>> parent of bb5dee3 (added small adjustments like deleting .js on import links)
 });
 
 // second test
@@ -67,5 +73,11 @@ test("Create new liquid converter", async t => {
 
     // assert
     // now expect that the results value is 47.317648000000005 cl
+<<<<<<< HEAD
 
+=======
+    .expect(resultLiquid.textContent).eql("Result: 47.317648000000005 cl");
+    // .expect(Selector(".resultLiquid").innerText).contains("Result: 47.317648000000005 cl")
+    
+>>>>>>> parent of bb5dee3 (added small adjustments like deleting .js on import links)
 });
