@@ -1,40 +1,52 @@
-import { Selector } from 'testcafe';
+import { Selector } from "testcafe";
 
-fixture`Tic-Tac-Toe Game Test`
-  .page('http://localhost:1234/'); 
+fixture`Tic Tac Toe Game`
+    .page("http://localhost:1234/");
 
-test('Play a full game of Tic-Tac-Toe', async (t) => {
+test("X wins a game of Tic Tac Toe", async t => {
+    // Clicks on the boxes to make X win the game
+    await t
+        .click(Selector("#box-0"))
+        .click(Selector("#box-3"))
+        .click(Selector("#box-4"))
+        .click(Selector("#box-8"))
+        .click(Selector("#box-1"))
+        .click(Selector("#box-5"))
+        .click(Selector("#box-2"));
 
-  const gameContainer = Selector('.game-container');
-  const winnerMessage = Selector('.winner');
-  const playAgainButton = Selector('.button');
+    // Asserts that the game ends
+    const winMessage = Selector(".winner").innerText;
+    await t.expect(winMessage).contains("Winner is X");
 
- 
-  async function getBoxContent(index) {
-    return await Selector(`#box-${index}`).textContent;
-  }
+    // Clicks the "Play again?" button
+    await t.click(Selector(".button"));
 
- 
-  await t.click(gameContainer);
-
-  
-  await t
-    .click(Selector('#box-1')) // Player X's turn
-    .click(Selector('#box-0')) // Player O's turn
-    .click(Selector('#box-2')) // Player X's turn
-    .click(Selector('#box-3')) // Player O's turn
-    .click(Selector('#box-4')) // Player X's turn
-    .click(Selector('#box-5')) // Player O's turn
-    .click(Selector('#box-6')) // Player X's turn
-    .click(Selector('#box-7')) // Player O's turn
-    .click(Selector('#box-8')); // Player X's turn
-
-  
-  const gameOutcome = await winnerMessage.textContent;
-
-  
-  await t
-    .expect(gameOutcome).contains('Winner is')
-    .click(playAgainButton); 
+    // Asserts that the game board resets
+    const boxContent = await Selector(".box").innerText;
+    await t.expect(boxContent).eql("");
 });
 
+// Second Test where O wins the game
+
+test("O wins a game of Tic Tac Toe", async t => {
+  await t
+  .click(Selector("#box-1"))
+  .click(Selector("#box-2"))
+  .click(Selector("#box-5"))
+  .click(Selector("#box-4"))
+  .click(Selector("#box-7"))
+  .click(Selector("#box-3"))
+  .click(Selector("#box-0"))
+  .click(Selector("#box-6"));
+
+// Asserts that the game ends
+const winMessage = Selector(".winner").innerText;
+await t.expect(winMessage).contains("Winner is O");
+
+// Clicks the "Play again?" button
+await t.click(Selector(".button"));
+
+// Asserts that the game board resets
+const boxContent = await Selector(".box").innerText;
+await t.expect(boxContent).eql("");
+});
