@@ -1,0 +1,54 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+h1 {
+    color: #333;
+}
+
+.add-task {
+    margin: 20px;
+}
+
+input[type="text"] {
+    width: 60%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    padding: 8px 16px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    background-color: #f5f5f5;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    display: flex; /* Enable flex layout */
+    align-items: center; /* Vertically center items */
+    justify-content: space-between; /* Spread items horizontally */
+}
+
+.completed {
+    text-decoration: line-through;
+}
+
+/* New styles for buttons and button container */
+li .button-container {
+    display: flex;
+    gap: 10px; /* Add spacing between buttons */
+    align-items: center;
+}
