@@ -1,0 +1,114 @@
+/* color palette */
+:root {
+    --primary-color: #A3683A;
+    --secondary-color: #c871b1;
+  
+    --white-color: #f9f9f9;
+  }
+  
+  
+  /* font  */
+  :root {
+    --font-family: "cafe-mimi-mvb", sans-serif;
+    --bold-font: 700;
+  }
+  
+  * {
+    margin: 0;
+    border: 0;
+  }
+  
+  body {
+    background-color: rgb(245, 233, 212);
+    padding: 80px 10%;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  
+  /* title and subheader */
+  .title-subheading {
+    padding-bottom: 60px;
+    text-align: center;
+    padding-right: 10%;
+    padding-left: 10%;
+  }
+  
+  .title-subheading p {
+    font-size: 18px;
+  }
+  
+  
+  /* the forms */
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .converter-weight {
+    margin-bottom: 100px;
+  }
+  
+  
+  /* the options in the forms */
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  select, input {
+    padding: 10px 25px;
+    border-radius: 10px;
+    background-color: var(--white-color);
+  }
+  
+  
+  /* button to submit */
+  button {
+    background-color: var(--secondary-color);
+    color: var(--white-color);
+    margin-top: 16px;
+    padding: 15px 25px;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  
+  
+  /* text styling */
+  h1, h2, h4, p, label {
+    color: var(--primary-color);
+  }
+  
+  h1, h2, h4 {
+    font-family: var(--font-family);
+    font-weight: var(--bold-font);
+  }
+  
+  h2 {
+    font-size: 36px;
+  }
+  
+  h1 {
+    font-size: 72px;
+  }
+  
+  h4 {
+    font-size: 32px;
+  }
+  
+  
+  /* styling the list of the calculations */
+  .result-list-weight, .result-list-liquid {
+    padding: 24px 0;
+  }
+  
+  .resultWeight, .resultLiquid {
+    padding-bottom: 45px;
+    font-size: 32px;
+  }
+  
+  .resultWeightHistory, .resultLiquidHistory {
+    font-size: 18px;
+    font-weight: var(--bold-font);
+  }

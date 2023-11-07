@@ -1,22 +1,127 @@
-import './style.css';
+interface HasFormatter {
+  format(): string;
+}
 
-// modules import
-import { listResults } from '../src/modules/listResults'
+// to show the unit type and its options to convert from
+interface Unit {
+  type: string;
+  options: string [];
+} 
 
-// classes import
-import { Ounce } from './classes/ounce';
-import { Pound } from './classes/pound';
-import { FlOz } from './classes/flOz';
-import { Cup } from './classes/cup';
-import { Pt } from './classes/pt';
+// how the list will be printed out with text
+class listResults {
+    constructor(private container: HTMLUListElement) {}
 
-// interfaces import
-import { HasFormatter } from './interfaces/HasFormatter';
-import { Unit } from './interfaces/unit';
+    render(item: HasFormatter, heading: string, pos: 'start' | 'end') {
+        const li = document.createElement('li');
 
+        const h4 = document.createElement('h4');
 
+        h4.innerText = heading; // 'heading' is what will be shown as the heading, write the variable that calculates the converting
+        li.append(h4);
 
+        const p = document.createElement('p');
+        p.innerText = item.format();
+        li.append(p);
 
+        // put at start 
+        if(pos === 'start') {
+            this.container.prepend(li);
+        } else {
+            this.container.append(li);
+        }
+    }
+}
+
+// interface with classes for Cup
+// 'implements HasFormatter' tells it to follow the structure of HasFormatter
+class Cup implements HasFormatter{
+  
+    // tell system what to expect with constructor
+    constructor (
+        public convertFromLiquid: string, 
+        public amountLiquid: number, // make public so it is accessable to change the value
+        public convertToLiquid: string, 
+        public resultsLiquid: number, 
+    ) {}
+  
+    // prints out what was the result of the conversion
+    format() {
+      return `${this.amountLiquid} ${this.convertFromLiquid} = ${this.resultsLiquid} ${this.convertToLiquid}`;
+    }
+  }
+
+// interface with classes for Fluid ounce
+// 'implements HasFormatter' tells it to follow the structure of HasFormatter
+class FlOz implements HasFormatter{
+  
+  // tell system what to expect with constructor
+  constructor (
+      public convertFromLiquid: string, 
+      public amountLiquid: number, // make public so it is accessable to change the value
+      public convertToLiquid: string,
+      public resultsLiquid: number, 
+  ) {}
+
+  // prints out what was the result of the conversion
+  format() {
+    return `${this.amountLiquid} ${this.convertFromLiquid} = ${this.resultsLiquid} ${this.convertToLiquid}`;
+  }
+}
+
+// interface with classes for Ounce
+// 'implements HasFormatter' tells it to follow the structure of HasFormatter
+class Ounce implements HasFormatter{
+  
+    // tell system what to expect with constructor
+    constructor (
+        public convertFromWeight: string,
+        public amountWeight: number, // make public so it is accessable to change the value
+        public convertToWeight: string, 
+        public resultsWeight: number, 
+    ) {}
+  
+    // prints out what was the result of the conversion
+    format() {
+      return `${this.resultsWeight} ${this.convertToWeight}(s) = ${this.amountWeight} ${this.convertFromWeight}(s)`;
+    }
+  }
+
+// interface with classes for Pound
+// 'implements HasFormatter' tells it to follow the structure of HasFormatter
+class Pound implements HasFormatter{
+  
+  // tell system what to expect with constructor
+  constructor (
+      public convertFromWeight: string,
+      public amountWeight: number, // make public so it is accessable to change the value
+      public convertToWeight: string, 
+      public resultsWeight: number, 
+  ) {}
+
+  // prints out what was the result of the conversion
+  format() {
+    return `${this.resultsWeight} ${this.convertToWeight}(s) = ${this.amountWeight} ${this.convertFromWeight}(s)`;
+  }
+}
+
+// interface with classes for Pint
+// 'implements HasFormatter' tells it to follow the structure of HasFormatter
+class Pt implements HasFormatter{
+  
+    // tell system what to expect with constructor
+    constructor (
+        public convertFromLiquid: string,
+        public amountLiquid: number, // make public so it is accessable to change the value
+        public convertToLiquid: string, 
+        public resultsLiquid: number, 
+    ) {}
+  
+    // prints out what was the result of the conversion
+    format() {
+      return `${this.amountLiquid} ${this.convertFromLiquid} = ${this.resultsLiquid} ${this.convertToLiquid}`;
+    }
+  }
 
 // title of forms to show what you are converting from and to and what you can convert
 // weight title
@@ -130,9 +235,6 @@ formWeight.addEventListener('submit', (e: Event) => {
 })
 
 
-
-
-
 // liquid converter
 
 // links to american to european converter
@@ -227,8 +329,6 @@ const calculateConvertLiquid = () => {
   return resultLiquid;
 }
 
-
-
 // print result out below the form
 formLiquid.addEventListener('submit', (e: Event) => {
   e.preventDefault();
@@ -260,7 +360,5 @@ formLiquid.addEventListener('submit', (e: Event) => {
   // write the list out
   listLiquid.render(docTwo, convertFromLiquid.value, 'end')
 
-
-  
   console.log(docTwo);
 })
