@@ -5,60 +5,82 @@
     <link rel="icon" type="image/svg+xml" href="./vite.sv" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Unit converter</title>
-    <!-- <script src="main.js"></script> -->
     <link rel="stylesheet" href="https://use.typekit.net/scw6dug.css">
     <link rel="stylesheet" href="style.css">
 
   </head>
   <body>
+    <main>
+
+      <!-- title -->
       <div class="title-subheading">
         <h1>Americans being American</h1>
         <p>Ever wanted to bake a cake and the recipe is written in the “wrong” unit? We do! And that is why we created this unit converter calculator.</p>
       </div>
       
+      <!-- calculating weight  -->
       <h2 class="unitWeight"></h2>
       <form class="converter-weight">
           <div class="field">
             <label>What do you want to convert from:</label>
+
+            <!-- select weight units -->
             <select id="convertFromWeight">
               <option value="pound" class="pound">Pound</option>
               <option value="ounce" class="ounce">Ounce</option>
             </select>
           </div> 
+
+          <!-- type in a number of weight -->
           <div class="field">
             <label>Amount:</label>
             <input type="number" id="amountWeight">
           </div>
+
         <div class="field">
           <label>What do you want to convert to:</label>
+
+          <!-- select weight units to convert to -->
           <select id="convertToWeight">
             <option value="gram" class="gram">Gram</option>
             <option value="kilogram" class="kilogram">Kilogram</option>
           </select>
         </div>   
         
+        <!-- show list of results -->
         <button id="convertBtnWeight">Convert my choices</button>
+
         <ul class="result-list-weight">
           <p class="resultWeight"></p>
           <p class="resultWeightHistory"></p>
         </ul>
       </form>
+
+
+      <!-- calculating liquid -->
       <h2 class="unitLiquid"></h2>
       <form class="converter-liquid">
           <div class="field">
             <label>What do you want to convert from:</label>
+
+            <!-- select liquid units -->
             <select id="convertFromLiquid">
               <option value="flOz" class="flOz">Fluid Ounce</option>
               <option value="cup" class="cup">Cup</option>
               <option value="pt" class="pt">Pint</option>
             </select>
           </div> 
+
+          <!-- type in a number of liquid -->
           <div class="field">
             <label>Amount:</label>
             <input type="number" id="amountLiquid">
           </div>
+
         <div class="field">
           <label>What do you want to convert to:</label>
+
+          <!-- select liquid units to convert to -->
           <select id="convertToLiquid">
             <option value="ml" class="ml">Milliliter</option>
             <option value="l" class="l">Liter</option>
@@ -67,17 +89,18 @@
           </select>
         </div>   
         
-            <button id="convertBtnLiquid">Convert my choices</button>
-            <ul class="result-list-liquid">
-              <p class="resultLiquid"></p>
-              <p class="resultLiquid"></p>
-              <p class="resultLiquidHistory"></p>
-            </ul>
+        <!-- show list of results -->
+        <button id="convertBtnLiquid">Convert my choices</button>
+
+        <ul class="result-list-liquid">
+          <p class="resultLiquid"></p>
+          <p class="resultLiquid"></p>
+          <p class="resultLiquidHistory"></p>
+        </ul>
       </form>
+    </main>
+      
 
-
-      <script>var exports = {};</script>
     <script src="main.js"></script>
   </body>
 </html>
-

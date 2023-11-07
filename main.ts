@@ -1,3 +1,5 @@
+// :( deleted folders with interfaces, classes and modules because vite and manual ts do not like to export and import
+
 interface HasFormatter {
   format(): string;
 }
