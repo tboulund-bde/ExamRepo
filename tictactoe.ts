@@ -18,22 +18,59 @@ type BoardCoordinates = [number, number];
 
 class TicTacToe implements TicTacToeGame {
 
-  board: Board = [];
-  currentPlayer: Player = Player.X;
+  board: Board;
+  currentPlayer: Player = Player.X; 
 
-
-  //Todo implement missing functionallities.
+  constructor() {
+    this.board = [
+      [null, null, null],
+      [null, null, null],
+      [null, null, null]
+    ]; 
+  }
 
   move(row: number, col: number): boolean {
-    throw new Error("Method not implemented.");
+    if (this.board[row][col] === null) {
+      this.board[row][col] = this.currentPlayer;
+      return true;
+    }
+    return false;
   }
+
   checkWinner(): Player | null {
-    throw new Error("Method not implemented.");
+    const lines: BoardCoordinates[] = [
+      // Rows
+      [0, 0], [0, 1], [0, 2],
+      [1, 0], [1, 1], [1, 2],
+      [2, 0], [2, 1], [2, 2],
+      // Columns
+      [0, 0], [1, 0], [2, 0],
+      [0, 1], [1, 1], [2, 1],
+      [0, 2], [1, 2], [2, 2],
+      // Diagonals
+      [0, 0], [1, 1], [2, 2],
+      [0, 2], [1, 1], [2, 0]
+    ];
+
+    for (let i = 0; i < lines.length; i += 3) {
+      const [a, b, c] = [lines[i], lines[i + 1], lines[i + 2]];
+      if (this.board[a[0]][a[1]] && this.board[a[0]][a[1]] === this.board[b[0]][b[1]] && this.board[a[0]][a[1]] === this.board[c[0]][c[1]]) {
+        return this.board[a[0]][a[1]];
+      }
+    }
+
+    return null;
+
   }
+
   switchPlayer(): void {
-    throw new Error("Method not implemented.");
+    this.currentPlayer = this.currentPlayer === Player.X ? Player.O : Player.X;
   }
+  
   isBoardFull(): boolean {
-    throw new Error("Method not implemented.");
+    return this.board.every(row => row.every(cell => cell !== null));
   }
+
+  
+  //Todo implement missing functionallities.
 }
