@@ -2,7 +2,7 @@
 import { Selector } from 'testcafe';
 
 fixture `TicTacToe Game`
-    .page `http://localhost:8081/`; 
+    .page `http://127.0.0.1:5500/index.html`; 
 test('Player X can make a move', async t => {
 
     const cell = Selector('.cell').nth(0);
