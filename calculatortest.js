@@ -1,7 +1,7 @@
 import { Selector } from "testcafe";
 
 // Test #1, testing addition
-fixture`Calculator Tests`.page`http://localhost:5173/`;
+fixture`Calculator Tests`.page`http://calculator.goulashsup.dk/`;
 
 test("Addition Test", async (t) => {
   await t
@@ -14,7 +14,7 @@ test("Addition Test", async (t) => {
 });
 
 // Test #2, testing error handling
-fixture`Calculator Tests`.page`http://localhost:5173/`;
+fixture`Calculator Tests`.page`http://calculator.goulashsup.dk/`;
 
 test("Error Handling Test", async (t) => {
   await t
