@@ -21,6 +21,6 @@ test('Game switches player after a move', async t => {
     await t
         .click(firstCell)
         .click(secondCell)
-        .expect(firstCell.textContent).eql('X')
+        .expect(firstCell.textContent).eql('X') 
         .expect(secondCell.textContent).eql('O');
 });
