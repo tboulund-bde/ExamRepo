@@ -202,7 +202,7 @@ button:hover {
 .heading {
   font-size: 30px;
   font-weight: bold;
-  color: red;
+  color: #4169e1;
 }
 
 .text {
