@@ -1,11 +1,16 @@
-import { Selector, t } from 'testcafe';
+import { Selector } from 'testcafe';
 
 fixture('ToDo List App').page('./index.html');
 
-test('Add Task Test', async () => {
-  await t
-    .typeText('#taskInput', 'New Task')
-    .click('button')
-    .expect(Selector('#taskList li').innerText).contains('New Task (Incomplete)');
+test('Verify Background Color', async (t) => {
+  const appElement = Selector('body');
+  const expectedColor = 'rgb(85, 85, 85)';
+
+  console.log(await appElement.getStyleProperty('background-color'));
+
+  await t.expect(appElement.getStyleProperty('background-color')).eql(expectedColor);
 });
+
+
+
 
