@@ -1,10 +1,6 @@
 "use strict";
-// app.ts
-// Explicit variable declaration
 var explicitNumber = 42;
-// Implicit variable declaration
 var implicitString = "Hello, TypeScript!";
-// Implement the TodoList interface
 var SimpleTodoList = /** @class */ (function () {
     function SimpleTodoList() {
         this.tasks = [];
@@ -26,7 +22,7 @@ var SimpleTodoList = /** @class */ (function () {
     };
     return SimpleTodoList;
 }());
-// Example usage
+
 var myTodoList = new SimpleTodoList();
 myTodoList.addTask({ id: 1, description: "Learn TypeScript", completed: false });
 myTodoList.addTask({ id: 2, description: "Build a TypeScript app", completed: false });
